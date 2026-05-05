@@ -1,11 +1,13 @@
 import os
 import uuid
 
+from flask_cors import CORS
 from flask import Flask, abort, request, send_file
 from PIL import Image, UnidentifiedImageError
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+CORS(app)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
