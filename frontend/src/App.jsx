@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [file, setFile] = useState(null);
@@ -43,7 +44,7 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div className="container">
       <h1>PNG to JPG Converter</h1>
 
       <input
@@ -51,8 +52,6 @@ function App() {
         accept=".png"
         onChange={(e) => setFile(e.target.files[0])}
       />
-
-      <br /><br />
 
       <button onClick={handleUpload}>Convert</button>
 
