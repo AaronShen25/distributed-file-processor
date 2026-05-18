@@ -2,40 +2,78 @@
 
 A cloud-based distributed file processing platform where users upload files, jobs are processed asynchronously by workers, and results are stored and tracked through AWS services.
 
-## Phase 1: Local File Conversion
+## Current Progress
 
-Completed a full-stack local PNG to JPG converter.
+### Phase 1: Local File Conversion
+Completed a full-stack PNG to JPG conversion system.
 
-### Features
+Features:
+- React frontend for file upload
+- Flask backend API
+- PNG → JPG conversion using Pillow
+- Automatic file download
+- File validation for supported input types
 
-- Upload PNG file through React frontend
-- Send file to Flask backend
-- Convert PNG → JPG using Pillow
-- Automatically download converted image
-- Basic file validation
+### Phase 2: Cloud Storage Integration
+Completed AWS S3 storage integration.
 
-## Phase 2: AWS S3 Storage
+Features:
+- Upload original PNG files to AWS S3
+- Upload converted JPG files to AWS S3
+- AWS credential management via environment variables
+- Temporary local processing with cloud persistence
 
-Next phase: move uploaded and converted files from local folders into AWS S3.
+## Current Architecture
 
-### Phase 2 Goals
-
-- Create an S3 bucket for file storage
-- Upload original PNG files to S3
-- Upload converted JPG files to S3
-- Generate download links for converted files
-- Keep local conversion logic working while replacing local storage with cloud storage
+```text
+Frontend (React)
+    ↓
+Flask API
+    ↓
+Temporary local storage
+    ↓
+AWS S3 (original upload)
+    ↓
+Image conversion (Pillow)
+    ↓
+AWS S3 (converted output)
+    ↓
+Frontend download
+```
 
 ## Tech Stack
 
-- Frontend: React + Vite
-- Backend: Flask + Python
-- Image Processing: Pillow
-- Phase 2 Cloud Storage: AWS S3
+### Frontend
+- React
+- Vite
+- JavaScript
+- CSS
+
+### Backend
+- Python
+- Flask
+- Flask-CORS
+- Pillow
+
+### Cloud
+- AWS S3
+- boto3
+- python-dotenv
 
 ## How to Run
 
 ### Backend
+
+Create `backend/.env`:
+
+```env
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_REGION=your_region
+S3_BUCKET_NAME=your_bucket_name
+```
+
+Install dependencies and run:
 
 ```bash
 cd backend
@@ -53,8 +91,28 @@ npm run dev
 
 ## Future Phases
 
+### Phase 3
 - DynamoDB job tracking
-- SQS async queue
-- Worker processing with Lambda or Docker
-- Reliability features: retries, validation, dead-letter queue
-- Simple dashboard
+- Job IDs and status API
+- Frontend polling for status
+
+### Phase 4
+- AWS SQS async queue
+- Decouple upload from processing
+
+### Phase 5
+- Worker processing system
+- Lambda or Docker workers
+
+### Phase 6
+- Retries
+- Dead-letter queue
+- Validation
+- Idempotency
+- Monitoring
+
+### Phase 7
+- Dashboard UI
+- Upload history
+- Progress indicators
+- Multiple file support
