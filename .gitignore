@@ -16,11 +16,19 @@ dist-ssr/
 # Backend Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .env
+venv/
+.venv/
 
 # Generated files
 backend/uploads/
 backend/outputs/
+
+# Environment / AWS
+.env
+.env.local
 
 # Editor files
 .vscode/
@@ -32,3 +40,6 @@ backend/outputs/
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
