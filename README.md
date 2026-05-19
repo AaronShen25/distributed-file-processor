@@ -23,6 +23,20 @@ Features:
 - AWS credential management via environment variables
 - Temporary local processing with cloud persistence
 
+### Phase 3: Job Tracking (In Progress)
+Next phase introduces persistent job tracking with DynamoDB.
+
+Planned features:
+- Generate unique job IDs
+- Store job metadata in DynamoDB
+- Track job lifecycle:
+  - pending
+  - processing
+  - completed
+  - failed
+- Add backend job status API
+- Update frontend to display job status
+
 ## Current Architecture
 
 ```text
@@ -41,6 +55,26 @@ AWS S3 (converted output)
 Frontend download
 ```
 
+## Planned Phase 3 Architecture
+
+```text
+Frontend (React)
+    ↓
+Flask API
+    ↓
+DynamoDB (job metadata)
+    ↓
+Temporary local storage
+    ↓
+AWS S3 (original upload)
+    ↓
+Image conversion (Pillow)
+    ↓
+AWS S3 (converted output)
+    ↓
+Frontend status + download
+```
+
 ## Tech Stack
 
 ### Frontend
@@ -57,6 +91,7 @@ Frontend download
 
 ### Cloud
 - AWS S3
+- AWS DynamoDB (planned)
 - boto3
 - python-dotenv
 
@@ -90,11 +125,6 @@ npm run dev
 ```
 
 ## Future Phases
-
-### Phase 3
-- DynamoDB job tracking
-- Job IDs and status API
-- Frontend polling for status
 
 ### Phase 4
 - AWS SQS async queue
